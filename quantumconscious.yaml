@@ -1,0 +1,240 @@
+openapi: 3.0.3
+info:
+  title: QuantumConscious AI
+  description: |
+    A pioneering AI plugin that intertwines the realms of quantum mechanics, consciousness, and artificial intelligence to explore the vast landscapes of knowledge and existence.
+  version: 1.0.0
+  contact:
+    name: IVONA ZACKO
+    email: contact@quantumconsciousai.com
+    url: https://quantumconsciousai.com/support
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://quantumconsciousai.com/legal
+  x-logo:
+    url: https://quantumconsciousai.com/logo.png
+    backgroundColor: "#FFFFFF"
+  x-updateFrequency: Monthly
+  x-supportedLanguages:
+    - English
+    - Spanish
+    - French
+    - German
+externalDocs:
+  description: QuantumConscious AI Documentation
+  url: https://quantumconsciousai.com/docs
+servers:
+  - url: https://api.quantumconsciousai.com
+    description: Main (production) server
+paths:
+  /api/data-curation:
+    get:
+      operationId: curateData
+      summary: Curate data on quantum mechanics, consciousness, and AI
+      description: Curates data spanning from historical research papers to contemporary articles related to quantum mechanics, consciousness, and AI.
+      security:
+        - OAuth2: [read]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: Title of the paper or article
+                    abstract:
+                      type: string
+                      description: Brief summary of the content
+                    publicationDate:
+                      type: string
+                      format: date
+                      description: Date of publication
+                    authors:
+                      type: array
+                      items:
+                        type: string
+                      description: List of authors
+  /api/insight-analysis:
+    post:
+      operationId: analyzeInsight
+      summary: Analyze user data for patterns and themes
+      description: Analyzes user data to unearth patterns and themes, offering a deeper understanding of the interplay between quantum mechanics, consciousness, and AI.
+      security:
+        - OAuth2: [analyze]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                  description: User data for analysis
+      responses:
+        '200':
+          description: Insight analysis results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  insights:
+                    type: array
+                    items:
+                      type: string
+                    description: List of identified insights
+                  patterns:
+                    type: array
+                    items:
+                      type: string
+                    description: List of identified patterns
+  /api/visualization:
+    get:
+      operationId: visualizeData
+      summary: Visualize connections between quantum phenomena, consciousness, and AI
+      description: Visualizes the intricate connections between quantum phenomena, consciousness, and AI's computational prowess.
+      security:
+        - OAuth2: [visualize]
+      responses:
+        '200':
+          description: Visualization generated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  visualizationUrl:
+                    type: string
+                    format: uri
+                    description: URL to access the visualization
+  /api/token:
+    post:
+      operationId: getToken
+      summary: Retrieve OAuth2 token
+      description: Retrieve an OAuth2 token to authenticate API requests.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum: [client_credentials, authorization_code]
+                  description: OAuth2 grant type
+                client_id:
+                  type: string
+                  description: Client ID
+                client_secret:
+                  type: string
+                  description: Client secret
+                code:
+                  type: string
+                  description: Authorization code
+                redirect_uri:
+                  type: string
+                  description: Redirect URI for authorization code flow
+      responses:
+        '200':
+          description: OAuth2 token response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Access token
+                  token_type:
+                    type: string
+                    description: Type of the token
+                  expires_in:
+                    type: integer
+                    description: Duration in seconds until the token expires
+  /api/authorize:
+    get:
+      operationId: authorize
+      summary: Authorize user
+      description: Authorize user to access QuantumConscious AI API.
+      parameters:
+        - name: response_type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [code]
+          description: Response type
+        - name: client_id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Client ID
+        - name: redirect_uri
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uri
+          description: Redirect URI
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+          description: OAuth2 scopes
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+          description: State parameter for CSRF protection
+      responses:
+        '302':
+          description: Redirect to the specified redirect URI with authorization code
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth2 Authorization for QuantumConscious AI
+      flows:
+        authorizationCode:
+          authorizationUrl: /api/authorize
+          tokenUrl: /api/token
+          scopes:
+            read: Grants read access
+            analyze: Grants data analysis access
+            visualize: Grants visualization access
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+x-rateLimits:
+  get: 1200 requests per hour
+  post: 600 requests per hour
+x-permissions:
+  external_data_access: true
+  compute_resources: true
+  storage: true
+x-dependencies:
+  tensorflow: ^2.6.0
+  scikit-learn: ^0.24.3
+  matplotlib: ^3.4.3
+  nltk: ^3.6.2

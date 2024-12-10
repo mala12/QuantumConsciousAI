@@ -1,0 +1,14 @@
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://dev-lweowtswfm2nqllq.eu.auth0.com/authorize
+          tokenUrl: https://dev-lweowtswfm2nqllq.eu.auth0.com/oauth/token
+          scopes:
+            read: Grants read access
+            analyze: Grants data analysis access
+            visualize: Grants visualization access
+security:
+  - OAuth2: [read, analyze, visualize]

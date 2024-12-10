@@ -1,0 +1,13 @@
+openapi: 3.0.3
+info:
+  title: QuantumConscious AI
+  description: |
+    A pioneering AI plugin that intertwines the realms of quantum mechanics, consciousness, and artificial intelligence to explore the vast landscapes of knowledge and existence.
+  version: 1.0.0
+  contact:
+    name: IVONA ZACKO
+    email: contact@quantumconsciousai.com
+    url: https://quantumconsciousai.com/support
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
